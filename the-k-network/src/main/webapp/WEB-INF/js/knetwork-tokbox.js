@@ -20,7 +20,7 @@
 		session.addEventListener("streamCreated", streamCreatedHandler);
 		session.addEventListener("streamDestroyed", streamDestroyedHandler);
 		session.addEventListener("sessionDisconnected", sessionDisconnectedHandler);
-
+		
 		/*
 		If testing the app from the desktop, be sure to check the Flash Player Global Security setting
 		to allow the page from communicating with SWF content loaded from the web. For more information,
@@ -39,7 +39,6 @@
 		for (var i = 0; i < event.streams.length; i++) {
 			subscribeToStream(event.streams[i]);
 		}
-
 		// Now possible to join a session
 		show("publishLink");
 	}
@@ -61,8 +60,6 @@
 			} else {
 				// Our publisher just started streaming
 				show("unpublishLink");
-				$("#collapseAudio").collapse();
-				$("#audioHeading").innerHTML = "Audio Controls (connected)";
 			}
 		}
 	}
@@ -75,7 +72,6 @@
 				document.getElementById("call-status").innerHTML = "Ready to Connect Audio";
 				show("publishLink");
 				hide("unpublishLink");
-				$("#audioHeading").innerHTML = "Audio Controls (disconnected)";
 			}
 			var removedSubscribers = session.getSubscribersForStream(event.streams[i]);
 			for (i = 0; i < removedSubscribers.length; i++) {

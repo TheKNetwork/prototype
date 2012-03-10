@@ -11,7 +11,7 @@
 		</div>
 		<div id="collapseAudio" class="accordion-body in collapse"
 			style="height: auto;">
-			<div class="accordion-inner">
+			<div class="accordion-inner" style="height: 180px">
 				<jsp:include page="../tokbox/include.jsp" />
 			</div>
 		</div>

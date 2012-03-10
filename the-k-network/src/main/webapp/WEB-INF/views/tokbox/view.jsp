@@ -5,8 +5,8 @@
 			<div class="smalltype">Status:  <span id="call-status">Connecting</span></div>
 			
 		    <div id="links" style="height:24px">
-		        <input type="button" value="Connect to Audio" id ="publishLink" onClick="javascript:startPublishing()" />
-		        <input type="button" value="Disconnect from Audio" id ="unpublishLink" onClick="javascript:stopPublishing()" />
+		        <input type="button" value="Connect to Audio" id ="publishLink" onClick="javascript:startPublishing()" style="display:none"/>
+		        <input type="button" value="Disconnect from Audio" id ="unpublishLink" onClick="javascript:stopPublishing()" style="display:none" />
 		    </div>
 		</div>
 		
