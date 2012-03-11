@@ -5,7 +5,6 @@ import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -13,6 +12,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringUtils;
 
 public class WhiteboardUtil {
@@ -20,19 +20,28 @@ public class WhiteboardUtil {
 	private static final String URL_AUTH_ROOT = "https://knetwork.tutortrove.com/api_v1/SSO/whiteboard";
 	private static final String PRIVATE_KEY = "9b578551e3509fb425fab9f6c501af87";
 	private static final String CONSUMER_KEY = "152";
+	private static final String TEST_URL = "https://knetwork.tutortrove.com/api_v1/SSO/whiteboard?oauth_consumer_key=152&oauth_nonce=4ce6313c3fc24&oauth_signature=nHtdxOpLxgiMBrmq9tUIRnkv%2BMc%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1290154300&oauth_version=1.0&user_id=312&user_name=Guest&user_skype=testskype&user_type=tutor&whiteboard_hash=135la23as&whiteboard_title=Test%20Session";
 
 	public static void main(String[] args) {
-		System.out.println(WhiteboardUtil.generateWhiteboardUrl(UUID.randomUUID().toString(), "TestWhiteboard", "bob"));
+		try {
+			System.out.println("nHtdxOpLxgiMBrmq9tUIRnkv%2BMc%3D");
+			System.out.println(WhiteboardUtil.generateWhiteboardUrl(UUID.randomUUID().toString(), "Test Session", "Guest","312"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static String generateWhiteboardUrl(String learningSessionId,
-			String whiteboardTitle, String userName) {
+			String whiteboardTitle, String userName, String userId) throws Exception {
 		
 		String url = "";
 		Calendar cal = Calendar.getInstance();
 		
 		
-		String whiteboard_hash = learningSessionId;
+		String whiteboard_hash = "135la23as";
+		
+		System.out.println(whiteboard_hash);
+		
 		String whiteboard_title = whiteboardTitle;
 		String user_type = "tutor";
 		String user_id = userName;
@@ -40,9 +49,9 @@ public class WhiteboardUtil {
 
 		String oauth_signature = "";
 		String oauth_signature_method = "HMAC-SHA1";
-		String oauth_timestamp = Long.toString(cal.getTimeInMillis()/1000);
+		String oauth_timestamp = "1290154300"; //Long.toString(cal.getTimeInMillis()/1000);
 		String oauth_version = "1.0";
-		String oauth_nonce = a64BitRandomString();
+		String oauth_nonce = "4ce6313c3fc24";
 		String oauth_consumer_key = "152";
 
 	    try 
@@ -57,6 +66,7 @@ public class WhiteboardUtil {
 	                { "oauth_version", oauth_version },
 	        		{ "user_id", user_id },
 	                { "user_name", user_name },
+	        		{ "user_skype", "testskype" },
 	        		{ "user_type", user_type },
 	        		{ "whiteboard_hash", whiteboard_hash },
 	        		{ "whiteboard_title", whiteboard_title }
@@ -89,18 +99,31 @@ public class WhiteboardUtil {
 	    	e.printStackTrace();
 	    }
 		
-		return url;
+		return TEST_URL;
 	}
 
+	private static final String HMAC_SHA1_ALGORITHM = "HmacSHA1";
+	
 	private static String computeHmac(String baseString, String key)
-			throws NoSuchAlgorithmException, InvalidKeyException,
-			IllegalStateException, UnsupportedEncodingException {
-		Mac mac = Mac.getInstance("HmacSHA1");
-		SecretKeySpec secret = new SecretKeySpec(key.getBytes(),
-				mac.getAlgorithm());
-		mac.init(secret);
-		byte[] digest = mac.doFinal(baseString.getBytes());
-		String s = Base64.encodeBase64String(digest);
+			throws Exception {
+		
+		byte[] keyBytes = key.getBytes();			
+		SecretKeySpec signingKey = new SecretKeySpec(keyBytes, HMAC_SHA1_ALGORITHM);
+		 
+		// Get an hmac_sha1 Mac instance and initialize with the signing key
+		Mac mac = Mac.getInstance(HMAC_SHA1_ALGORITHM);
+		mac.init(signingKey);
+
+		// Compute the hmac on input data bytes
+		byte[] rawHmac = mac.doFinal(baseString.getBytes());
+		
+		// Convert raw bytes to Hex
+		byte[] hexBytes = new Base64().encode(rawHmac);
+		
+		//  Covert array of Hex bytes to a String
+		String s = new String(hexBytes, "ISO-8859-1");
+		s = URLEncoder.encode(s);
+		s = StringUtils.replace(s,"%0D%0A","");
 		return s;
 	}
 

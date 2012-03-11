@@ -1,7 +1,7 @@
 <jsp:include page="../shared/header.jsp" />
 
-<div class="accordion" id="accordion2">
-
+<div class="accordion" id="accordion2" style="margin-top:0px; padding-top:0px">
+    <%--
 	<div class="accordion-group">
 		<div class="accordion-heading">
 			<a class="accordion-toggle" data-toggle="collapse"
@@ -15,7 +15,7 @@
 				<jsp:include page="../tokbox/include.jsp" />
 			</div>
 		</div>
-	</div>
+	</div>  --%>
 
 	<div class="accordion-group">
 		<div class="accordion-heading">
@@ -34,11 +34,11 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<iframe class="offset1" name="inlineframe" src="learn/whiteboard" 
+<iframe name="inlineframe" src="learn/whiteboard" 
 						frameborder="0" scrolling="auto" 
 						width="100%" height="680"
-						marginwidth="3" marginheight="0" ></iframe>
+						marginwidth="0" marginheight="0" ></iframe>
+</div>
 
 <jsp:include page="../shared/footer.jsp" />

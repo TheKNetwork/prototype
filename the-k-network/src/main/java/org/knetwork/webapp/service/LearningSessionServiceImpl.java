@@ -7,11 +7,17 @@ import java.util.List;
 import org.knetwork.webapp.entity.hibernate.LearningSessionPo;
 import org.knetwork.webapp.util.LearningSession;
 import org.knetwork.webapp.util.SessionMapUtil;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Repository("learningSessionService")
+@Transactional
 public class LearningSessionServiceImpl extends GenericServiceImpl implements LearningSessionService {
 
+	
+	
 	/* (non-Javadoc)
 	 * @see org.knetwork.webapp.service.LearningSessionService#getLearningSessions()
 	 */

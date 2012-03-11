@@ -27,6 +27,8 @@ public class SessionMapUtil {
 
 	public static String initWhiteboardSession(HttpSession session, String learningSessionId,
 			String username, String title, String joinOrCreate, String prefix) {
+		
+		/*
 		StringBuilder builder = new StringBuilder();
 		builder.append(prefix + "/whiteboard/workplace");
 
@@ -52,7 +54,17 @@ public class SessionMapUtil {
 		}
 		System.out.println(builder.toString());
 		session.setAttribute("whiteboardJoinUrl", builder.toString());
-		return builder.toString();
+		*/
+		
+		//return builder.toString();
+		String url = "";
+		try {
+			url = WhiteboardUtil.generateWhiteboardUrl(learningSessionId, title, username, username);
+			session.setAttribute("whiteboardJoinUrl", url);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return url;
 	}
 	
 	public static String initWhiteboardSessionForChat(HttpSession session, String orgId,

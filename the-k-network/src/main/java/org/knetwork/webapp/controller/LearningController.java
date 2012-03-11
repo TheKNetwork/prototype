@@ -26,15 +26,14 @@ import com.opentok.exception.OpenTokException;
 @Controller
 public class LearningController {
 
-	private final TokboxService tokboxService;
+	// private final TokboxService tokboxService;
 	private static final String PREFIX = "http://theknetwork.org/whiteboard";
 	private final UserFeedbackService userFeedbackService;
 
 	@Inject
-	public LearningController(TokboxService tokboxService,
-			UserFeedbackService userFeedbackService) {
+	public LearningController(UserFeedbackService userFeedbackService) {
 		super();
-		this.tokboxService = tokboxService;
+		//this.tokboxService = tokboxService;
 		this.userFeedbackService = userFeedbackService;
 	}
 
@@ -50,16 +49,17 @@ public class LearningController {
 		userFeedbackService
 				.saveLearningSession(learningSessionId, sessionTitle);
 
-		try {
+			/*
 			Map<String, String> tokboxMap = tokboxService
 					.createSession(learningSessionId);
-			String tokboxSessionId = tokboxMap.get("tokboxSessionId");
-			String moderatorToken = tokboxMap.get("moderatorToken");
+					*/
+			//String tokboxSessionId = tokboxMap.get("tokboxSessionId");
+			//String moderatorToken = tokboxMap.get("moderatorToken");
 			SessionMapUtil.setSessionTitle(learningSessionId, sessionTitle);
 
-			model.addAttribute("tokboxSessionId", tokboxSessionId);
-			session.setAttribute("moderatorToken", moderatorToken);
-			session.setAttribute("tokboxSessionId", tokboxSessionId);
+			//model.addAttribute("tokboxSessionId", tokboxSessionId);
+			//session.setAttribute("moderatorToken", moderatorToken);
+			//session.setAttribute("tokboxSessionId", tokboxSessionId);
 			model.addAttribute("joinOrCreate", "join");
 
 			SessionMapUtil.initWhiteboardSession(session, learningSessionId,
@@ -69,10 +69,6 @@ public class LearningController {
 			SessionMapUtil.initWhiteboardSession(session, learningSessionId,
 					(String) session.getAttribute("nickName"), sessionTitle,
 					"join", PREFIX);
-			
-		} catch (OpenTokException e) {
-			e.printStackTrace();
-		}
 
 		return String.format("learning/view");
 	}
