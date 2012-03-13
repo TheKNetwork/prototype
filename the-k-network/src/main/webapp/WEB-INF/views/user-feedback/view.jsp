@@ -24,7 +24,7 @@
 		<div id="comment">
 			<form id="commentForm">
 				<textarea rows="3" cols="10" id="commentText"></textarea><br/>
-				<a href="#" onclick="saveComment()" class="btn btn-primary pull-left" >Save</a>
+				<a href="javascript://void()" onclick="saveComment()" class="btn btn-primary pull-left" >Save</a>
 			</form>		<div id="messageComment" class="pull-left" style="margin-top:-11px; margin-left: 20px;">
 		</div>
 		</div>
@@ -35,6 +35,7 @@
 			    	url:"user-feedback/comment?comment="+$("#commentText").val()
 			    });
 			    $("#messageComment").html("Thanks!");
+			    hideShow();
 			}	
 		</script>
 

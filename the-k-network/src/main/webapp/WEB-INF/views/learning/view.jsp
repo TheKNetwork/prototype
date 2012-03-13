@@ -1,43 +1,33 @@
 <%@ include file="../../standard-include.jspf" %>
 <jsp:include page="../shared/header.jsp" />
 
-<div class="row">
-	<div class="span8">
-		<h5>
-			<a href="team/${sessionScope.orgId}">Return to the Meeting Area</a>
-		</h5>
-	</div>
+<script type="text/javascript">
+	var isShown = false;
+	function hideShow() {
+		if(isShown) {
+			$('#collapseOne').collapse('hide');
+			isShown = false;
+		} else {
+			$('#collapseOne').collapse('show');
+			isShown = true;
+		}
+	}
+</script>
+
+<div class="container">	
+	<ul class="nav nav-pills">
+	  <li><a href="team/${sessionScope.orgId}">Return to the Meeting Area</a></li>
+	  <li><a href="javascript://void()" onclick="hideShow()"><span id="feedbackTitle">Click here to give feedback</span></a></li>
+	</ul>
 </div>
 
 <div class="accordion" id="accordion2" style="margin-top:0px; padding-top:0px">
-    <%--
 	<div class="accordion-group">
-		<div class="accordion-heading">
-			<a class="accordion-toggle" data-toggle="collapse"
-				data-parent="#accordion2" href="#collapseAudio">
-				<h5><div id="audioHeading">Audio Controls</div></h5>
-			</a>
-		</div>
-		<div id="collapseAudio" class="accordion-body in collapse"
-			style="height: auto;">
-			<div class="accordion-inner" style="height: 180px">
-				<jsp:include page="../tokbox/include.jsp" />
-			</div>
-		</div>
-	</div>  --%>
-
-	<div class="accordion-group">
-		<div class="accordion-heading">
-			<a class="accordion-toggle" data-toggle="collapse"
-				data-parent="#accordion2" href="#collapseOne">
-				<h5>Click here to give feedback</h5>
-			</a>
-		</div>
 		<div id="collapseOne" class="accordion-body collapse"
 			style="height: 0px;">
 			<div class="accordion-inner">
 				<div id="userFeedbackIncludeDiv"
-					class="offset1 pull-left alert alert-info">
+					class=" pull-left alert alert-info">
 					<jsp:include page="../user-feedback/view.jsp" />
 				</div>
 			</div>
