@@ -34,8 +34,8 @@ public class UserFeedbackServiceImpl extends GenericServiceImpl implements UserF
 		} else return null;
 	}
 	
-	public void saveLearningSession(String learningSessionId, String learningSessionTitle) {
-		getDao().save(new LearningSessionPo(learningSessionId, learningSessionTitle));
+	public void saveLearningSession(String learningSessionId, String learningSessionTitle, String orgId) {
+		getDao().save(new LearningSessionPo(learningSessionId, learningSessionTitle, orgId));
 	}
 	
 	public void saveUserComment(UserCommentPo userComment) {

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface LearningSessionService {
 
-	public List<LearningSession> getLearningSessions();
+	public List<LearningSession> getLearningSessions(String orgId);
 
 }

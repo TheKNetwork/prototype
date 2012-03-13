@@ -8,17 +8,18 @@ public class LearningSessionPo extends BasePo {
 
 	String learningSessionTitle;
 	String learningSessionId;
+	String orgId;
 	Set<UserRatingPo> userRatings = new HashSet<UserRatingPo>();
 	Set<UserCommentPo> userComments = new HashSet<UserCommentPo>();
 	Date sessionDate = new Date();
 	
-	public LearningSessionPo() {
-	}
+	public LearningSessionPo() {}
 	
-	public LearningSessionPo(String learningSessionId, String learningSessionTitle) {
+	public LearningSessionPo(String learningSessionId, String learningSessionTitle, String orgId) {
 		super();
 		this.learningSessionTitle = learningSessionTitle;
 		this.learningSessionId = learningSessionId;
+		this.orgId = orgId;
 	}
 	
 	public String getLearningSessionTitle() {
@@ -56,6 +57,14 @@ public class LearningSessionPo extends BasePo {
 
 	public void setUserComments(Set<UserCommentPo> userComments) {
 		this.userComments = userComments;
+	}
+
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
 	}
 	
 }

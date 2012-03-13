@@ -6,7 +6,7 @@
 	<h3>Teams:</h3>
 	<br />
 	<c:forEach items="${organizations}" var="org">
-		<i class="icon-tags"></i><b><a href="team/${org.orgId}"/>${org.orgTitle}</a></b>
+		<i class="icon-tags"></i><b><a href="team/${org.orgId}">${org.orgTitle}</a></b>
 		<br />
 		<br />
 	</c:forEach>

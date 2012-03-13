@@ -21,14 +21,17 @@ public class LearningSessionServiceImpl extends GenericServiceImpl implements Le
 	/* (non-Javadoc)
 	 * @see org.knetwork.webapp.service.LearningSessionService#getLearningSessions()
 	 */
-	public List<LearningSession> getLearningSessions() {
+	public List<LearningSession> getLearningSessions(String orgId) {
 		Calendar nowCal = Calendar.getInstance();
 		nowCal.add(Calendar.MINUTE, 45);
 		
 		List<LearningSession> sessions = new ArrayList<LearningSession>();
 		for (String key : SessionMapUtil.sessionMap.keySet()) {
 			LearningSessionPo foundLs = (LearningSessionPo)getDao().findById(LearningSessionPo.class, key);
-			if(foundLs!=null && foundLs.getSessionDate() != null) {
+			
+			System.out.println("ORG ID is " + foundLs.getOrgId());
+			
+			if(foundLs!=null && foundLs.getSessionDate() != null && foundLs.getOrgId()!=null && foundLs.getOrgId().equals(orgId)) {
 				Calendar sessionCal = Calendar.getInstance();
 				sessionCal.setTime(foundLs.getSessionDate());
 				if(!sessionCal.after(nowCal)) {

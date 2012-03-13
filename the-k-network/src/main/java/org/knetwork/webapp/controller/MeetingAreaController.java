@@ -1,6 +1,8 @@
 package org.knetwork.webapp.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.knetwork.webapp.entity.hibernate.OrganizationPo;
+import org.knetwork.webapp.service.LearningSessionService;
 import org.knetwork.webapp.service.OrgService;
 import org.knetwork.webapp.util.SessionMapUtil;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,7 @@ public class MeetingAreaController {
 
 	private OrgService orgService;
 	private static final String PREFIX = "http://theknetwork.org/whiteboard";
+	private LearningSessionService learningSessionService;
 	
 	@RequestMapping("team/{organization}")
 	public String joinMeetingArea(final HttpSession session,
@@ -32,7 +36,9 @@ public class MeetingAreaController {
 				(String) session.getAttribute("nickName"), "Group%20Chat",
 				"create", PREFIX);
 		
+		session.setAttribute("orgId", organization);
 		model.addAttribute("returnTo", "/team/" + organization);
+    	model.addAttribute("learningSessions",learningSessionService.getLearningSessions(organization));
 		
 		return "meeting-area/meetingArea";
 	}
@@ -48,10 +54,14 @@ public class MeetingAreaController {
 	@RequestMapping("save-org")
 	public String saveOrganization(final HttpSession session,
 			final HttpServletRequest request, final Model model,
-			@RequestParam("orgId") String orgId, @RequestParam("orgTitle") String orgTitle)
+			@RequestParam("orgId") String orgId)
 			throws MalformedURLException {
 		
-		orgService.saveOrganization(orgId, orgTitle);
+		try {
+			orgService.saveOrganization(URLEncoder.encode(orgId,"UTF-8"), orgId);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		return "redirect:/org-list";
 	}
 	
@@ -59,6 +69,8 @@ public class MeetingAreaController {
 	public String listOrgs(final HttpSession session,
 			final HttpServletRequest request, final Model model)
 			throws MalformedURLException {
+		
+		session.setAttribute("orgId",null);
 		List<OrganizationPo> results = orgService.getOrganizations();
 		model.addAttribute("organizations", results);
 		return "meeting-area/organizationList";
@@ -67,6 +79,12 @@ public class MeetingAreaController {
 	@Inject
 	public void setOrgService(OrgService orgService) {
 		this.orgService = orgService;
+	}
+
+	@Inject
+	public void setLearningSessionService(
+			LearningSessionService learningSessionService) {
+		this.learningSessionService = learningSessionService;
 	}
 	
 }

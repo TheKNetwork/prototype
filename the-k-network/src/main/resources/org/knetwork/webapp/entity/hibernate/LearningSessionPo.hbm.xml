@@ -10,6 +10,9 @@
         <property name="learningSessionTitle" type="string">
             <column name="learning_session_title"/>
         </property>
+        <property name="orgId" type="string">
+            <column name="org_id"/>
+        </property>
         <property name="sessionDate" type="java.util.Date">
         	<column name="session_date"/>
         </property>

@@ -21,6 +21,6 @@ public interface UserFeedbackService extends GenericService {
 	
 	public void saveUserComment(UserCommentPo userComment);
 	
-	public void saveLearningSession(String learningSessionId, String learningSessionTitle);
+	public void saveLearningSession(String learningSessionId, String learningSessionTitle, String orgId);
 	
 }

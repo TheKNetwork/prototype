@@ -86,7 +86,6 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             } else {
             	session.setAttribute("hasNickName", false);
             }
-        	modelAndView.addObject("learningSessions",learningSessionService.getLearningSessions());
         }
 	}
 	

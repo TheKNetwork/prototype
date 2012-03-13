@@ -1,9 +1,5 @@
 package org.knetwork.webapp.util;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.UUID;
@@ -27,39 +23,9 @@ public class SessionMapUtil {
 
 	public static String initWhiteboardSession(HttpSession session, String learningSessionId,
 			String username, String title, String joinOrCreate, String prefix) {
-		
-		/*
-		StringBuilder builder = new StringBuilder();
-		builder.append(prefix + "/whiteboard/workplace");
-
-		try {
-
-			URL url = new URL(
-					prefix+"/api/"
-							+ joinOrCreate + "?sessionId=" + learningSessionId
-							+ "&title=" + title + "&username=" + username);
-			URLConnection conn = url.openConnection();
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					conn.getInputStream()));
-			String inputLine;
-
-			while ((inputLine = in.readLine()) != null) {
-				builder.append(inputLine);
-			}
-			in.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(builder.toString());
-		session.setAttribute("whiteboardJoinUrl", builder.toString());
-		*/
-		
-		//return builder.toString();
 		String url = "";
 		try {
-			url = WhiteboardUtil.generateWhiteboardUrl(learningSessionId, title, username, username);
+			url = WhiteboardUtil.generateWhiteboardUrl(title, learningSessionId, "tutor", username, username);
 			session.setAttribute("whiteboardJoinUrl", url);
 		} catch (Exception e) {
 			e.printStackTrace();

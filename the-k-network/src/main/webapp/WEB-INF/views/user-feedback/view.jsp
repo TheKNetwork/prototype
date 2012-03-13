@@ -20,7 +20,7 @@
 	</div>
 
 	<div id="commentThisSessionDiv" class="pull-right" style="margin-left:25px">
-		<b>What do you think?</b>
+		<b>What can we improve to make The K Network better?</b>
 		<div id="comment">
 			<form id="commentForm">
 				<textarea rows="3" cols="10" id="commentText"></textarea><br/>

@@ -1,4 +1,13 @@
+<%@ include file="../../standard-include.jspf" %>
 <jsp:include page="../shared/header.jsp" />
+
+<div class="row">
+	<div class="span8">
+		<h5>
+			<a href="team/${sessionScope.orgId}">Return to the Meeting Area</a>
+		</h5>
+	</div>
+</div>
 
 <div class="accordion" id="accordion2" style="margin-top:0px; padding-top:0px">
     <%--
@@ -21,7 +30,7 @@
 		<div class="accordion-heading">
 			<a class="accordion-toggle" data-toggle="collapse"
 				data-parent="#accordion2" href="#collapseOne">
-				<h5>How can we make this awesome???</h5>
+				<h5>Click here to give feedback</h5>
 			</a>
 		</div>
 		<div id="collapseOne" class="accordion-body collapse"
