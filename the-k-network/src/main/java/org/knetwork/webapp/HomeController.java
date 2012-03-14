@@ -33,5 +33,10 @@ public class HomeController {
         session.removeAttribute("accessToken");
         return "home";
     }
+    
+    @RequestMapping("exercises")
+    public String exercises(HttpSession session) {
+        return "exercises/view";
+    }
 
 }
