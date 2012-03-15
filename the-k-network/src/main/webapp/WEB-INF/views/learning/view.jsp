@@ -21,23 +21,22 @@
 	</ul>
 </div>
 
-<div class="accordion" id="accordion2" style="margin-top:0px; padding-top:0px">
+<div class="accordion" id="accordion2"
+	style="margin-top: 0px; padding-top: 0px">
 	<div class="accordion-group">
 		<div id="collapseOne" class="accordion-body collapse"
 			style="height: 0px;">
 			<div class="accordion-inner">
-				<div id="userFeedbackIncludeDiv"
-					class=" pull-left alert alert-info">
+				<div id="userFeedbackIncludeDiv" class=" pull-left alert alert-info">
 					<jsp:include page="../user-feedback/view.jsp" />
 				</div>
 			</div>
 		</div>
 	</div>
 
-<iframe name="inlineframe" src="learn/whiteboard" 
-						frameborder="0" scrolling="auto" 
-						width="100%" height="680"
-						marginwidth="0" marginheight="0" ></iframe>
+	<iframe name="inlineframe" src="learn/whiteboard" frameborder="0"
+		scrolling="auto" width="100%" height="680" marginwidth="0"
+		marginheight="0"></iframe>
 </div>
 
 <jsp:include page="../shared/footer.jsp" />

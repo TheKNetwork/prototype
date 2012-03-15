@@ -26,6 +26,12 @@
 	<script type="text/javascript" src="resources/js/lib/raty/js/jquery.raty.js"></script>
 	<script src="resources/js/bootstrap-collapse.js"></script>
 	
+    <script src="resources/js/bootstrap-alert.js"></script>
+    <script src="resources/js/bootstrap-modal.js"></script>
+    <script src="resources/js/bootstrap-tab.js"></script>
+    <script src="resources/js/bootstrap-tooltip.js"></script>
+    <script src="resources/js/bootstrap-popover.js"></script>
+	
 	<script type="text/javascript">
 		var learningSessionId = '${learningSessionId}';
 	</script>

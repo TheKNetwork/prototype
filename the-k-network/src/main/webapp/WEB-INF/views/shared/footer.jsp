@@ -22,10 +22,5 @@
 		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 	<![endif]-->
 	
-    <script src="resources/js/bootstrap-alert.js"></script>
-    <script src="resources/js/bootstrap-modal.js"></script>
-    <script src="resources/js/bootstrap-tab.js"></script>
-    <script src="resources/js/bootstrap-tooltip.js"></script>
-    <script src="resources/js/bootstrap-popover.js"></script>
 </body>
 </html>

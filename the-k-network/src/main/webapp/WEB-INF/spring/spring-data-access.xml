@@ -23,7 +23,7 @@
 
 	<tx:annotation-driven />
 
-	<!--   -->
+	<!--  --> 
 	<bean id="dataSource" 
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -33,10 +33,10 @@
 	</bean>
 	 
 	 
-	 <!-- For use on a java app server  
+	 <!-- For use on a java app server
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 	    <property name="jndiName" value="jdbc/knetwork"/>
-	</bean>-->
+	</bean> --> 
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">

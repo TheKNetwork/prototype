@@ -1,13 +1,24 @@
 <%@ include file="../../standard-include.jspf"%>
-<jsp:include page="../shared/header.jsp" />
 
 <script type="text/javascript">
 	function previewExercise(title, link, image) {
-		alert("You chose " + title);
+		$("#modalExercise").show();
+		$("#exerciseTitle").html(title);
+		$("#exerciseImage").html("<img src='" + image +"'/>");
 	}
 </script>
 
-<div class="well span4" style="padding: 8px 0">
+<div class="modal" id="modalExercise" style="display:none">
+  <div class="modal-header">
+    <h3><span id="exerciseTitle"></span></h3>
+  </div>
+  <div class="modal-body" id="exerciseImage"></div>
+  <div class="modal-footer">
+    <a class="btn btn-primary" onclick="$('#modalExercise').hide();">Close</a>
+  </div>
+</div>
+
+<div class="well">
 <ul class="nav nav-list">
 
 	<li class="nav-header"><a href="#collapse1" data-toggle="collapse">Uncategorized Exercises</a></li>
@@ -2355,5 +2366,3 @@
 </ul>
 <script text="type/javascript">$("#collapse10").collapse('hide');</script>
 </div>
-
-<jsp:include page="../shared/footer.jsp" />
