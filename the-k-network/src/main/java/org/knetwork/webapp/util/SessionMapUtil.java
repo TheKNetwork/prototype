@@ -1,7 +1,11 @@
 package org.knetwork.webapp.util;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +17,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+
 public class SessionMapUtil {
 
 	private static final String WHITEBOARD = "WHITEBOARD";
@@ -21,38 +27,77 @@ public class SessionMapUtil {
 
 	public final static Map<String, Map<String, String>> sessionMap = new Hashtable<String, Map<String, String>>();
 
-	public static String initWhiteboardSession(HttpSession session, String learningSessionId,
-			String username, String title, String joinOrCreate, String prefix) {
+	public final static Map<String, Set<String>> userMap = new Hashtable<String, Set<String>>();
+
+	public static void addUserToOrg(String nickname, String orgId) {
+		if(userMap.get(orgId)==null) {
+			userMap.put(orgId, new HashSet<String>());
+		}
+		userMap.get(orgId).add(nickname);
+	}
+
+	public static void removeUserToOrg(String nickname, String orgId) {
+		if(userMap.get(orgId)==null) {
+			userMap.put(orgId, new HashSet<String>());
+		} else {
+			Set<String> newUsers = new HashSet<String>();
+			for(String nick: userMap.get(orgId)) {
+				if(!nickname.equals(nick)) {
+					newUsers.add(nick);
+				}
+			}
+			userMap.put(orgId, newUsers);
+		}
+	}
+	
+	public static List<String> getUsersForOrg(String orgId) {
+		List<String> result = new ArrayList<String>();
+		if(userMap.get(orgId)==null) {
+			userMap.put(orgId, new HashSet<String>());
+			return result;
+		} else {
+			for(String nick: userMap.get(orgId)) {
+				result.add(nick);
+			}
+			Collections.sort(result);
+		}
+		return result;
+	}
+
+	public static String initWhiteboardSession(HttpSession session,
+			String learningSessionId, String username, String title,
+			String joinOrCreate, String prefix) {
 		String url = "";
 		try {
-			url = WhiteboardUtil.generateWhiteboardUrl(title, learningSessionId, "tutor", username, username);
+			url = WhiteboardUtil.generateWhiteboardUrl(title,
+					learningSessionId, "tutor", username, username);
 			session.setAttribute("whiteboardJoinUrl", url);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return url;
 	}
-	
-	public static String initWhiteboardSessionForChat(HttpSession session, String orgId,
-			String username, String title, String joinOrCreate, String prefix) {
+
+	public static String initWhiteboardSessionForChat(HttpSession session,
+			String orgId, String username, String title, String joinOrCreate,
+			String prefix) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(prefix + "/whiteboard/chat");
 
 		try {
 
-			String urlPath = 
-					prefix+"/api/chat?orgId=" + orgId
-					+ "&title=" + title + "&username=" + username;
+			String urlPath = prefix + "/api/chat?orgId=" + orgId + "&title="
+					+ title + "&username=" + username;
 
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpGet httpget = new HttpGet(urlPath);
 			HttpResponse response = httpclient.execute(httpget);
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
-			    long len = entity.getContentLength();
-			    if (len != -1 && len < 2048) {
-			    	builder.append(EntityUtils.toString(entity));
-			    }
+				long len = entity.getContentLength();
+				if (len != -1 && len < 2048) {
+					builder.append(EntityUtils.toString(entity));
+				}
 			}
 
 		} catch (Exception e) {
@@ -62,7 +107,7 @@ public class SessionMapUtil {
 		session.setAttribute("whiteboardJoinUrl", builder.toString());
 		return builder.toString();
 	}
-	
+
 	public static synchronized String generateLearningSessionId() {
 		String uuid = UUID.randomUUID().toString();
 		addLearningSessionToMap(uuid);
@@ -77,24 +122,27 @@ public class SessionMapUtil {
 			sessionMap.put(learningSessionId, apiSessionMap);
 		}
 	}
-	
-	public static void setSessionTitle(String learningSessionId, String sessionTitle) {
+
+	public static void setSessionTitle(String learningSessionId,
+			String sessionTitle) {
 		if (isLearningSessionMapped(learningSessionId)) {
-			Map<String, String> apiSessionMap = sessionMap.get(learningSessionId);
+			Map<String, String> apiSessionMap = sessionMap
+					.get(learningSessionId);
 			apiSessionMap.put(SESSION_TITLE, sessionTitle);
 			sessionMap.put(learningSessionId, apiSessionMap);
 		}
 	}
-	
+
 	public static String getSessionTitle(String learningSessionId) {
 		if (isLearningSessionMapped(learningSessionId)) {
-			Map<String, String> apiSessionMap = sessionMap.get(learningSessionId);
+			Map<String, String> apiSessionMap = sessionMap
+					.get(learningSessionId);
 			return apiSessionMap.get(SESSION_TITLE);
 		} else {
 			return "";
 		}
 	}
-	
+
 	private static boolean isLearningSessionMapped(String learningSessionId) {
 		System.out.println(sessionMap.size());
 		return sessionMap.get(learningSessionId) != null;

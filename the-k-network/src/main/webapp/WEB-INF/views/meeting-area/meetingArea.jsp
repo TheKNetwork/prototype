@@ -5,8 +5,7 @@
 <div class="container-fluid">
 	<div class="row-fluid offset2">
 		<c:if test="${sessionScope.hasNickName == true}">
-			<a class="btn btn-primary" data-toggle="modal" href="#sessionCreateDiv">Create Your Own Session</a>
-			<a class="btn btn-primary" data-toggle="modal" href="#nickChangeDiv">Change Your Nickname</a>	
+			<a class="btn btn-action" data-toggle="modal" href="#nickChangeDiv">Change Your Nickname</a>	
 		</c:if>
 	</div>
 	<div class="row-fluid" style="padding-top: 18px">
@@ -24,7 +23,7 @@
 				<div id="changeNicknameDiv">
 						<div class="alert alert-error">Enter a Nickname To Begin Using the Learning Session Features</div>
 						<form id="createNickNameForm" method="post"
-							action="learn/setNickName">
+							action="/learn/setNickName">
 							<label>Nickname</label>
 							<input type="text" class="span3"
 								placeholder="Nickname" id="nickName" name="nickName" value="${sessionScope.nickName}">
@@ -45,7 +44,7 @@
 						</div>
 						<div class="modal-body">
 							<form id="createSessionForm" method="post"
-								action="learn/createMeeting">
+								action="/learn/createMeeting">
 								<input type="hidden" class="span3"
 									placeholder="Nickname" id="nickName" name="nickName" value="${sessionScope.nickName}"> 
 									
@@ -57,7 +56,7 @@
 								<button type="submit" name="Save" value="Save" class="btn btn-primary">Start Session!</button>
 							</form>
 						</div>
-					
+						
 					<div class="modal-header">
 					<h4>Live Sessions</h4>
 					</div>
@@ -66,7 +65,7 @@
 						<ul class="nav nav-list">
 						<c:forEach items="${learningSessions}" var="lSession">
 							<c:if test="${sessionScope.hasNickName}">
-								<li><b><a href="learn/join?learningSessionId=${lSession.sessionId}">${lSession.sessionTitle}</a></b></li>
+								<li><b><a href="/learn/join?learningSessionId=${lSession.sessionId}">${lSession.sessionTitle}</a></b></li>
 							</c:if>
 							<c:if test="${sessionScope.hasNickName == false}">
 								<li><b>${lSession.sessionTitle}</b></li>
@@ -74,10 +73,15 @@
 						</c:forEach>
 						</ul>
 					</div>	
-					
 				</div>
 				
 				<div class="span4" style="padding-top: 12px">
+					<div id="userList"></div>
+					<script type="text/javascript">
+						$(function() {
+							$("#userList").load("/refresh-users");
+						});
+					</script>
 					
 					<iframe name="inlineframe" src="${whiteboardJoinUrl}" 
 						frameborder="0" scrolling="no" 
@@ -99,7 +103,7 @@
 	</div>
 	<div class="modal-body">
 		<form id="createSessionForm" method="post"
-			action="learn/createMeeting">
+			action="/learn/createMeeting">
 			<input type="hidden" class="span3"
 				placeholder="Nickname" id="nickName" name="nickName" value="${sessionScope.nickName}"> 
 				
@@ -122,10 +126,11 @@
 		<h3>Change your nickname, ${sessionScope.nickName}?</h3>
 	</div>
 	<div class="modal-body">
-		<form id="createNickNameForm" method="post" action="learn/setNickName">
+		<form id="createNickNameForm" method="post" action="/learn/setNickName">
 			<input type="text" class="span3" placeholder="New Nickname"
 				id="nickName" name="nickName" value="${sessionScope.nickName}">
 			<input type="hidden" name="returnTo" value="${returnTo}" /> <br />
+			<input type="hidden" name="oldNickName" value="${sessionScope.nickName}" />
 			<button type="submit" name="Save" value="Save" class="btn btn-primary">Save</button>
 		</form>
 	</div>

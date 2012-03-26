@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.knetwork.webapp.entity.User;
 import org.knetwork.webapp.model.ExerciseContainer;
 import org.knetwork.webapp.oauth.KhanOAuthService;
@@ -81,6 +82,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
         
         if(modelAndView!=null) {
             if(nickname!=null && nickname.length() > 0) {
+            	nickname = StringUtils.replace(nickname, " ", "_");
             	session.setAttribute("nickName",nickname);
             	session.setAttribute("hasNickName", true);
             } else {

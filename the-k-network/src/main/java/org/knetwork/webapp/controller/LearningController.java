@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.knetwork.webapp.service.UserFeedbackService;
 import org.knetwork.webapp.util.SessionMapUtil;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,8 @@ public class LearningController {
 		model.addAttribute("learningSessionId", learningSessionId);
 		session.setAttribute("learningSessionId", learningSessionId);
 		String sessionTitle = (String) request.getParameter("sessionTitle");
-
+		sessionTitle = StringUtils.replace(sessionTitle, " ", "_");
+		
 		String orgId = (String)session.getAttribute("orgId");
 		model.addAttribute("orgId",orgId);
 		userFeedbackService
@@ -52,7 +54,16 @@ public class LearningController {
 	public String setNickName(final HttpSession session,
 			final HttpServletRequest request, final Model model, @RequestParam("returnTo") String returnTo)
 			throws MalformedURLException {
+		String oldNick = request.getParameter("oldNickName");
+		if(oldNick!=null) {
+			SessionMapUtil.removeUserToOrg(oldNick, (String)session.getAttribute("orgId"));
+			System.out.println("removed old nickname from map");
+		}
+		
 		String nick = request.getParameter("nickName");
+		nick = StringUtils.replace(nick, " ", "_");
+		SessionMapUtil.addUserToOrg(nick, (String)session.getAttribute("orgId"));
+		
 		session.setAttribute("nickName", nick);
 		return String.format("redirect:" + returnTo);
 	}

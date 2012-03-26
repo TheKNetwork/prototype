@@ -6,7 +6,7 @@
 					<h4>Create your own Session</h4>
 					<br />
 					<form id="createSessionForm" method="post"
-						action="learn/createMeeting">
+						action="/learn/createMeeting">
 						<input type="hidden" class="span3"
 							placeholder="Nickname" id="nickName" name="nickName" value="${sessionScope.nickName}"> 
 							
@@ -20,7 +20,7 @@
 					<br/><br/>
 					<div class="alert alert-info">Change your nickname, ${sessionScope.nickName}?</div>
 					<form id="createNickNameForm" method="post"
-						action="learn/setNickName">
+						action="/learn/setNickName">
 						<input type="text" class="span3"
 							placeholder="New Nickname" id="nickName" name="nickName" value="${sessionScope.nickName}">
 						<input type="hidden" name="returnTo" value="${returnTo}"/>							
@@ -33,7 +33,7 @@
 				<c:if test="${sessionScope.hasNickName == false}">
 					<div class="alert alert-error">Enter a Nickname To Begin Using the Learning Session Features</div>
 					<form id="createNickNameForm" method="post"
-						action="learn/setNickName">
+						action="/learn/setNickName">
 						<label>Nickname</label>
 						<input type="text" class="span3"
 							placeholder="Nickname" id="nickName" name="nickName" value="${sessionScope.nickName}">
@@ -50,7 +50,7 @@
 				<br />
 				<c:forEach items="${learningSessions}" var="lSession">
 					<c:if test="${sessionScope.hasNickName}">
-						<b><a href="learn/join?learningSessionId=${lSession.sessionId}">${lSession.sessionTitle}</a></b>
+						<b><a href="/learn/join?learningSessionId=${lSession.sessionId}">${lSession.sessionTitle}</a></b>
 					</c:if>
 					<c:if test="${sessionScope.hasNickName == false}">
 						<b>${lSession.sessionTitle}</b>

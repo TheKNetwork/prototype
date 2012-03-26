@@ -10,7 +10,7 @@ public class UserRatingPo extends BasePo implements Serializable {
 	Integer rating;
 	Date ratingDate = new Date();
 	String userId;
-	LearningSessionPo learningSession;
+	String learningSessionId;
 
 	public String toString() {
 		return "User rating from " + userId + " was " + rating; 
@@ -48,12 +48,12 @@ public class UserRatingPo extends BasePo implements Serializable {
 		this.userId = userId;
 	}
 
-	public LearningSessionPo getLearningSession() {
-		return learningSession;
+	public String getLearningSessionId() {
+		return learningSessionId;
 	}
 
-	public void setLearningSession(LearningSessionPo learningSession) {
-		this.learningSession = learningSession;
+	public void setLearningSessionId(String learningSessionId) {
+		this.learningSessionId = learningSessionId;
 	}
 
 }

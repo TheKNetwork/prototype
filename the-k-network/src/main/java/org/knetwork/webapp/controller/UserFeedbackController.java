@@ -26,7 +26,7 @@ public class UserFeedbackController extends BaseController {
 		UserRatingPo uf = new UserRatingPo();
 		uf.setRating(Integer.parseInt(score));
 		uf.setUserId((String)session.getAttribute("nickName"));
-		uf.setLearningSession(userFeedbackService.getLearningSession((String)session.getAttribute("learningSessionId")));
+		uf.setLearningSessionId((String)session.getAttribute("learningSessionId"));
 		
 		logger.info("score " + uf.toString());
 		
@@ -47,7 +47,7 @@ public class UserFeedbackController extends BaseController {
 		UserCommentPo uf = new UserCommentPo();
 		uf.setComment(comment);
 		uf.setUserId((String)session.getAttribute("nickName"));
-		uf.setLearningSession(userFeedbackService.getLearningSession((String)session.getAttribute("learningSessionId")));
+		uf.setLearningSessionId((String)session.getAttribute("learningSessionId"));
 		
 		logger.info("score " + uf.toString());
 		

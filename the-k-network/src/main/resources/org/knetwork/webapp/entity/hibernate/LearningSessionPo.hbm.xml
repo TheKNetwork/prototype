@@ -16,18 +16,6 @@
         <property name="sessionDate" type="java.util.Date">
         	<column name="session_date"/>
         </property>
-        <set name="userRatings" table="user_rating" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="learning_session_id"/>
-            </key>
-            <one-to-many class="org.knetwork.webapp.entity.hibernate.UserRatingPo" />
-        </set>
-        <set name="userComments" table="user_comment" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="learning_session_id"/>
-            </key>
-            <one-to-many class="org.knetwork.webapp.entity.hibernate.UserCommentPo" />
-        </set>
     </class>
     
     <query name="findLearningSession">

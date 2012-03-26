@@ -43,6 +43,14 @@ public class MeetingAreaController {
 		return "meeting-area/meetingArea";
 	}
 	
+	@RequestMapping("refresh-users")
+	public String refreshUsers(final HttpSession session,
+			final HttpServletRequest request, final Model model)
+			throws MalformedURLException {
+		model.addAttribute("userList", SessionMapUtil.getUsersForOrg((String)session.getAttribute("orgId")));
+		return "meeting-area/userList";
+	}
+	
 	@RequestMapping("show-add-org")
 	public String showAddOrgPage(final HttpSession session,
 			final HttpServletRequest request, final Model model)

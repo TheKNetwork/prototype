@@ -1,10 +1,18 @@
 <%@ include file="../../standard-include.jspf"%>
 
 <script type="text/javascript">
+	var khanLink;
+
 	function previewExercise(title, link, image) {
+		khanLink = link;
 		$("#modalExercise").show();
 		$("#exerciseTitle").html(title);
 		$("#exerciseImage").html("<img src='" + image +"'/>");
+		$("#khanLink").html("<a href='javascript://void()' onclick='execKhanLink()' class='btn btn-primary'>Visit Subject on Khan Academy</a>");
+	}
+	
+	function execKhanLink() {
+		window.open(khanLink);
 	}
 </script>
 
@@ -14,6 +22,7 @@
   </div>
   <div class="modal-body" id="exerciseImage"></div>
   <div class="modal-footer">
+    <span id="khanLink"></span>
     <a class="btn btn-primary" onclick="$('#modalExercise').hide();">Close</a>
   </div>
 </div>
@@ -40,7 +49,7 @@
 
 		</ul>
 	</li>
-	<script text="type/javascript">$("#collapse1").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse1").collapse('hide');   });</script>
 	<li class="nav-header"><a href="#collapse2" data-toggle="collapse">Linear Algebra</a></li>
 
 	<li id="collapse2" class="accordion-body collapse in">
@@ -73,7 +82,7 @@
 					Expressions with unknown variables </a></li>
 
 		</ul></li>
-	<script text="type/javascript">$("#collapse2").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse2").collapse('hide');   });</script>
 	<li  class="nav-header"><a href="#collapse3" data-toggle="collapse">Calculus</a></li>
 
 	<li id="collapse3" class="accordion-body collapse in">
@@ -141,7 +150,7 @@
 
 		</ul></li>
 
-	<script text="type/javascript">$("#collapse3").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse3").collapse('hide');   });</script>
 	<li  class="nav-header"><a href="#collapse4" data-toggle="collapse">Precalculus</a></li>
 
 	<li id="collapse4" class="accordion-body collapse in">
@@ -155,7 +164,7 @@
 
 		</ul></li>
 
-	<script text="type/javascript">$("#collapse4").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse4").collapse('hide');   });</script>
 	<li  class="nav-header"><a href="#collapse5" data-toggle="collapse">Statistics</a></li>
 
 	<li id="collapse5" class="accordion-body collapse in">
@@ -225,7 +234,7 @@
 
 		</ul></li>
 
-	<script text="type/javascript">$("#collapse5").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse5").collapse('hide');   });</script>
 	<li  class="nav-header"><a href="#collapse6" data-toggle="collapse">Probability</a></li>
 
 	<li id="collapse6" class="accordion-body collapse in">
@@ -244,7 +253,7 @@
 					Probability 1 </a></li>
 
 		</ul></li>
-	<script text="type/javascript">$("#collapse6").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse6").collapse('hide');   });</script>
 	<li  class="nav-header"><a href="#collapse7" data-toggle="collapse">Trigonometry</a></li>
 
 	<li id="collapse7" class="accordion-body collapse in">
@@ -323,7 +332,7 @@
 					Trigonometry 0.5 </a></li>
 
 		</ul></li>
-	<script text="type/javascript">$("#collapse7").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse7").collapse('hide');   });</script>
 	<li  class="nav-header"><a href="#collapse8" data-toggle="collapse">Geometry</a></li>
 
 	<li id="collapse8" class="accordion-body collapse in">
@@ -581,7 +590,7 @@
 
 		</ul></li>
 
-	<script text="type/javascript">$("#collapse8").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse8").collapse('hide');   });</script>
 	<li  class="nav-header"><a href="#collapse9" data-toggle="collapse">Algebra</a></li>
 
 	<li id="collapse9" class="accordion-body collapse in">
@@ -1475,7 +1484,7 @@
 
 		</ul></li>
 
-	<script text="type/javascript">$("#collapse9").collapse('hide');</script>
+	<script text="type/javascript">$(function() {  $("#collapse9").collapse('hide');   });</script>
 	<li  class="nav-header"><a href="#collapse10" data-toggle="collapse">Arithmetic and Pre-Algebra</a></li>
 
 	<li id="collapse10" class="accordion-body collapse in">
@@ -2364,5 +2373,5 @@
 		</ul></li>
 
 </ul>
-<script text="type/javascript">$("#collapse10").collapse('hide');</script>
+<script text="type/javascript">$(function() {  $("#collapse10").collapse('hide');   });</script>
 </div>

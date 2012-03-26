@@ -16,7 +16,7 @@
 
 <div class="container">	
 	<ul class="nav nav-pills">
-	  <li><a href="team/${sessionScope.orgId}">Return to the Meeting Area</a></li>
+	  <li><a href="/team/${sessionScope.orgId}">Return to the Meeting Area</a></li>
 	  <li><a href="javascript://void()" onclick="hideShow()"><span id="feedbackTitle">Click here to give feedback</span></a></li>
 	</ul>
 </div>
@@ -34,7 +34,7 @@
 		</div>
 	</div>
 
-	<iframe name="inlineframe" src="learn/whiteboard" frameborder="0"
+	<iframe name="inlineframe" src="/learn/whiteboard" frameborder="0"
 		scrolling="auto" width="100%" height="680" marginwidth="0"
 		marginheight="0"></iframe>
 </div>

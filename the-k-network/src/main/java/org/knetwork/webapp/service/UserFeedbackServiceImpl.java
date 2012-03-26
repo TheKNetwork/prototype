@@ -45,7 +45,7 @@ public class UserFeedbackServiceImpl extends GenericServiceImpl implements UserF
 	public boolean saveUserFeedback(UserRatingPo userFeedback) {
 		UserRatingPo examplePo = new UserRatingPo();
 		examplePo.setUserId(userFeedback.getUserId());
-		examplePo.setLearningSession(userFeedback.getLearningSession());
+		examplePo.setLearningSessionId(userFeedback.getLearningSessionId());
 		int countOf = getDao().getRecordCountForExample(examplePo);
 		
 		if(countOf == 1) {

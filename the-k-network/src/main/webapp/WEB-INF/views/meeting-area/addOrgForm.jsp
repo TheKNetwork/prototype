@@ -6,7 +6,7 @@
 	<h3>Add a Team</h3>
 	
 	<form id="createOrgForm" method="post"
-		action="save-org">
+		action="/save-org">
 		<label>Team Name</label>
 		<input type="text" class="span3"
 			placeholder="Team Name" id="orgId" name="orgId"/>

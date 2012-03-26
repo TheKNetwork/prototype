@@ -8,6 +8,10 @@ import java.util.UUID;
 
 public class WhiteboardUtil {
 
+	public static void main(String[] args) {
+		
+	}
+	
 	public static String generateWhiteboardUrl(String whiteboardTitle,
 			String learningSessionId, String userType, String userName, String userId)
 			throws Exception {
@@ -18,7 +22,7 @@ public class WhiteboardUtil {
 	private static String runPythonWhiteboardCommand(String whiteboard_title, String whiteboard_hash, String user_type, String user_name, String user_id) {
 		StringBuilder builder = new StringBuilder();
 		try {
-			String commandLine = "/home/qed/geturl.sh "+whiteboard_title+" "+whiteboard_hash+" "+user_type+" "+user_name+" "+UUID.randomUUID().toString();
+			String commandLine = "/home/qed/geturl.sh "+whiteboard_title+" "+whiteboard_hash+" "+user_type+" "+user_name+" "+user_name;
 			System.out.println(commandLine);
 			String[] command = { "bash", "-c", commandLine };
 			

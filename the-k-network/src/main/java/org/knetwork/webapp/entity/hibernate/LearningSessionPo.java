@@ -9,8 +9,6 @@ public class LearningSessionPo extends BasePo {
 	String learningSessionTitle;
 	String learningSessionId;
 	String orgId;
-	Set<UserRatingPo> userRatings = new HashSet<UserRatingPo>();
-	Set<UserCommentPo> userComments = new HashSet<UserCommentPo>();
 	Date sessionDate = new Date();
 	
 	public LearningSessionPo() {}
@@ -35,28 +33,12 @@ public class LearningSessionPo extends BasePo {
 		this.learningSessionId = learningSessionId;
 	}
 
-	public Set<UserRatingPo> getUserRatings() {
-		return userRatings;
-	}
-
-	public void setUserRatings(Set<UserRatingPo> userRatings) {
-		this.userRatings = userRatings;
-	}
-
 	public Date getSessionDate() {
 		return sessionDate;
 	}
 
 	public void setSessionDate(Date sessionDate) {
 		this.sessionDate = sessionDate;
-	}
-
-	public Set<UserCommentPo> getUserComments() {
-		return userComments;
-	}
-
-	public void setUserComments(Set<UserCommentPo> userComments) {
-		this.userComments = userComments;
 	}
 
 	public String getOrgId() {
